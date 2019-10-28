@@ -10,6 +10,7 @@ import LanguageMenu from "./LanguageMenu";
 import SplitPane from "react-split-pane";
 import { ControlledEditor } from "@monaco-editor/react";
 import { hexToDate, hexToNumber, hexToString, stringToHex, dateToHex, numberToHex } from "@etclabscore/eserialize";
+import { SnackBar, ISnackBarNotification, NotificationType } from "../components/SnackBar/SnackBar";
 import "./MyApp.css";
 import PlayCircle from "@material-ui/icons/PlayCircleFilled";
 
@@ -41,7 +42,9 @@ const MyApp: React.FC = () => {
   const [value, setValue] = useQueryParam("value", StringParam);
   const [inputAnchorEl, setInputAnchorEl] = React.useState<null | HTMLElement>(null);
   const [outputAnchorEl, setOutputAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [error, setError] = React.useState();
   const [results, setResults] = useState();
+  const [notification, setNotification] = useState<ISnackBarNotification | undefined>();
   const valueGetter = useRef();
   const editorRef = useRef();
 
@@ -60,7 +63,7 @@ const MyApp: React.FC = () => {
     if (isEditorReady) {
       (editorRef as any).current.setValue(value || "");
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isEditorReady]);
 
   useEffect(() => {
@@ -80,8 +83,17 @@ const MyApp: React.FC = () => {
       setOutputOptions(inputOptions);
       return;
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      setNotification({
+        type: NotificationType.error,
+        message: error,
+      });
+    }
+  }, [error]);
 
   function handleSwap() {
     setInputOptions(outputOptions);
@@ -110,6 +122,7 @@ const MyApp: React.FC = () => {
         setResults((eserialize as any)[funcKey](coerce(editorValue)));
       } catch (e) {
         console.error(e);
+        setError(e.message);
       }
     }
   }
@@ -226,6 +239,12 @@ const MyApp: React.FC = () => {
           <Typography style={{ padding: "10px" }}>{results && results.toString()}</Typography>
         </div>
       </SplitPane>
+      <SnackBar
+        close={() => {
+          setNotification({} as ISnackBarNotification);
+          setError(undefined);
+        }}
+        notification={notification as ISnackBarNotification} />
     </MuiThemeProvider>
   );
 };
