@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MuiThemeProvider, AppBar, Toolbar, Typography, IconButton, Tooltip, CssBaseline, Grid, Button, Input, MenuItem, Menu } from "@material-ui/core"; //tslint:disable-line
+import { MuiThemeProvider, AppBar, Toolbar, Typography, IconButton, Tooltip, CssBaseline, Grid, Button, MenuItem, Menu } from "@material-ui/core"; //tslint:disable-line
 import useDarkMode from "use-dark-mode";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
@@ -8,7 +8,7 @@ import { lightTheme, darkTheme } from "../themes/theme";
 import { useTranslation } from "react-i18next";
 import LanguageMenu from "./LanguageMenu";
 import SplitPane from "react-split-pane";
-import { ControlledEditor, Monaco } from "@monaco-editor/react";
+import { ControlledEditor } from "@monaco-editor/react";
 import { hexToDate, hexToNumber, hexToString, stringToHex, dateToHex, numberToHex } from "@etclabscore/eserialize";
 import "./MyApp.css";
 import PlayCircle from "@material-ui/icons/PlayCircleFilled";
@@ -60,6 +60,7 @@ const MyApp: React.FC = () => {
     if (isEditorReady) {
       (editorRef as any).current.setValue(value || "");
     }
+  // eslint-disable-next-line
   }, [isEditorReady]);
 
   useEffect(() => {
@@ -79,6 +80,7 @@ const MyApp: React.FC = () => {
       setOutputOptions(inputOptions);
       return;
     }
+  // eslint-disable-next-line
   }, []);
 
   function handleSwap() {
