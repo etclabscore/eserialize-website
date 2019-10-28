@@ -1,6 +1,6 @@
 # ESerialize Website
 
-This goal if this site is to provide an easy interface to serialize and deserialize data for the Ethereum Stack.
+This goal of this site is to provide an easy interface to serialize and deserialize data for the Ethereum Stack.
 
 It is based on [etclabscore/eserialize](https://github.com/etclabscore/eserialize).
 
