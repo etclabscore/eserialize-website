@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/etclabscore/eserialize-website/compare/1.0.0...1.0.1) (2019-10-29)
+
+
+### Bug Fixes
+
+* change name and homepage ([e018d31](https://github.com/etclabscore/eserialize-website/commit/e018d31d41c83133c9144fbf2a8daeb1e39ec54a))
+
 # 1.0.0 (2019-10-29)
 
 
