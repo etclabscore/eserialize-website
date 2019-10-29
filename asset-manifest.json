@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pristine-typescript-react-material-ui/static/css/main.4f34ae21.chunk.css",
-    "main.js": "/pristine-typescript-react-material-ui/static/js/main.480dc963.chunk.js",
-    "main.js.map": "/pristine-typescript-react-material-ui/static/js/main.480dc963.chunk.js.map",
-    "runtime~main.js": "/pristine-typescript-react-material-ui/static/js/runtime~main.d843c283.js",
-    "runtime~main.js.map": "/pristine-typescript-react-material-ui/static/js/runtime~main.d843c283.js.map",
-    "static/js/2.5cca45e8.chunk.js": "/pristine-typescript-react-material-ui/static/js/2.5cca45e8.chunk.js",
-    "static/js/2.5cca45e8.chunk.js.map": "/pristine-typescript-react-material-ui/static/js/2.5cca45e8.chunk.js.map",
-    "index.html": "/pristine-typescript-react-material-ui/index.html",
-    "precache-manifest.47fa77fd760598e1994a3de757bcdde7.js": "/pristine-typescript-react-material-ui/precache-manifest.47fa77fd760598e1994a3de757bcdde7.js",
-    "service-worker.js": "/pristine-typescript-react-material-ui/service-worker.js",
-    "static/css/main.4f34ae21.chunk.css.map": "/pristine-typescript-react-material-ui/static/css/main.4f34ae21.chunk.css.map"
+    "main.css": "/eserialize-website/static/css/main.4f34ae21.chunk.css",
+    "main.js": "/eserialize-website/static/js/main.480dc963.chunk.js",
+    "main.js.map": "/eserialize-website/static/js/main.480dc963.chunk.js.map",
+    "runtime~main.js": "/eserialize-website/static/js/runtime~main.c5976f2f.js",
+    "runtime~main.js.map": "/eserialize-website/static/js/runtime~main.c5976f2f.js.map",
+    "static/js/2.5cca45e8.chunk.js": "/eserialize-website/static/js/2.5cca45e8.chunk.js",
+    "static/js/2.5cca45e8.chunk.js.map": "/eserialize-website/static/js/2.5cca45e8.chunk.js.map",
+    "index.html": "/eserialize-website/index.html",
+    "precache-manifest.918f8696875f875e7e5c59dcfbd7513d.js": "/eserialize-website/precache-manifest.918f8696875f875e7e5c59dcfbd7513d.js",
+    "service-worker.js": "/eserialize-website/service-worker.js",
+    "static/css/main.4f34ae21.chunk.css.map": "/eserialize-website/static/css/main.4f34ae21.chunk.css.map"
   }
 }
