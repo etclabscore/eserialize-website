@@ -1,3 +1,17 @@
+# 1.0.0 (2019-10-29)
+
+
+### Bug Fixes
+
+* **README:** add usage gif ([11e65e2](https://github.com/etclabscore/eserialize-website/commit/11e65e271f1aa11fafbd10a4d66cddb0039d4a5c))
+* **README:** bad grammar ([7e21d2b](https://github.com/etclabscore/eserialize-website/commit/7e21d2b2fcf4cad5c6d66a81735bcdbe200df6cc))
+* **README:** if > of typo ([37ee44d](https://github.com/etclabscore/eserialize-website/commit/37ee44d1156be4a171700490029ef0c8311a3e99))
+* **README:** Initial README ([0a94d9e](https://github.com/etclabscore/eserialize-website/commit/0a94d9e5556c1350ff956f31a47ad6b4907378bb))
+* add error handling and SnackBar error notification ([d74173d](https://github.com/etclabscore/eserialize-website/commit/d74173d39de4a50c79603edbe710ee899ec97748))
+* add url configuration ([4adca37](https://github.com/etclabscore/eserialize-website/commit/4adca374f2c0809a961fe11b52c190da6b34be79))
+* linting ([bd93fbf](https://github.com/etclabscore/eserialize-website/commit/bd93fbfdcd9e27f7b57f799c3485f9c2bf8f4ee8))
+* linting ([c651584](https://github.com/etclabscore/eserialize-website/commit/c651584e4cea12bddcc8bc1d4e29a8d60d9fd28f))
+
 # 1.0.0 (2019-10-24)
 
 
