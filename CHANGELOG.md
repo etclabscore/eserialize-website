@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/etclabscore/eserialize-website/compare/1.0.1...1.0.2) (2019-10-31)
+
+
+### Bug Fixes
+
+* **package.json:** homepage to eserialize.com ([b4aa076](https://github.com/etclabscore/eserialize-website/commit/b4aa0767b5dc1b769e51f39370f5a034678e61fc))
+
 ## [1.0.1](https://github.com/etclabscore/eserialize-website/compare/1.0.0...1.0.1) (2019-10-29)
 
 
