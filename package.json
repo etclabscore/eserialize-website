@@ -1,7 +1,7 @@
 {
   "name": "@etclabscore/eserialize-website",
   "version": "0.0.0-development",
-  "homepage": "https://etclabscore.github.io/eserialize-website",
+  "homepage": "https://eserialize.com",
   "description": "",
   "main": "build/index.js",
   "scripts": {
