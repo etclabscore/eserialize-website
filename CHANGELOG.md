@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/etclabscore/eserialize-website/compare/1.0.2...1.0.3) (2020-12-31)
+
+
+### Bug Fixes
+
+* update deps + monaco editor ([988af66](https://github.com/etclabscore/eserialize-website/commit/988af66501daf7b60a1433964cc7b196efc49d7f))
+
 ## [1.0.2](https://github.com/etclabscore/eserialize-website/compare/1.0.1...1.0.2) (2019-10-31)
 
 
