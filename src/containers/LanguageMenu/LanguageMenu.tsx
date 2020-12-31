@@ -20,10 +20,11 @@ const LanguageMenu: React.FC = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const title: string = t("Change Language");
 
   return (
     <>
-      <Tooltip title={t("Change Language")}>
+      <Tooltip title={title}>
         <Button onClick={handleClick}>{supportedLanguages[i18n.language]}</Button>
       </Tooltip>
       <Menu
