@@ -33,15 +33,16 @@ i18n
       escapeValue: false,
       format: (value, format, lng) => {
         if (!lng) {
-          return;
+          return "";
         }
         const ln = momentMap[lng];
         switch (format) {
           case "date":
-            return moment(value).locale(ln || "en").format("MMMM Do YYYY, h:mm:ss a") as any;
+            return moment(value).locale(ln || "en").format("MMMM Do YYYY, h:mm:ss a");
           default:
             break;
         }
+        return "";
       },
     },
   });

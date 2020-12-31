@@ -8,11 +8,11 @@ import { lightTheme, darkTheme } from "../themes/theme";
 import { useTranslation } from "react-i18next";
 import LanguageMenu from "./LanguageMenu";
 import SplitPane from "react-split-pane";
-import { ControlledEditor } from "@monaco-editor/react";
+import MonacoEditor from "@etclabscore/react-monaco-editor";
 import { hexToDate, hexToNumber, hexToString, stringToHex, dateToHex, numberToHex } from "@etclabscore/eserialize";
 import { SnackBar, ISnackBarNotification, NotificationType } from "../components/SnackBar/SnackBar";
-import "./MyApp.css";
 import PlayCircle from "@material-ui/icons/PlayCircleFilled";
+import * as monaco from "monaco-editor";
 
 import { useQueryParam, StringParam } from "use-query-params";
 
@@ -25,7 +25,12 @@ const eserialize = {
   numberToHex,
 };
 
-const MyApp: React.FC = () => {
+interface IProps {
+  hideToggleDarkMode?: boolean;
+}
+
+const MyApp: React.FC<IProps> = (props) => {
+  const hideToggleDarkMode = props.hideToggleDarkMode;
   const darkMode = useDarkMode();
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [inputOptions, setInputOptions] = useState([
@@ -42,7 +47,7 @@ const MyApp: React.FC = () => {
   const [value, setValue] = useQueryParam("value", StringParam);
   const [inputAnchorEl, setInputAnchorEl] = React.useState<null | HTMLElement>(null);
   const [outputAnchorEl, setOutputAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState<string | undefined>();
   const [results, setResults] = useState();
   const [notification, setNotification] = useState<ISnackBarNotification | undefined>();
   const valueGetter = useRef();
@@ -60,8 +65,9 @@ const MyApp: React.FC = () => {
   }
 
   useEffect(() => {
-    if (isEditorReady) {
-      (editorRef as any).current.setValue(value || "");
+    if (isEditorReady && editorRef.current !== undefined) {
+      const currentEditor: any = editorRef.current;
+      currentEditor.setValue(value || "");
     }
     // eslint-disable-next-line
   }, [isEditorReady]);
@@ -89,7 +95,7 @@ const MyApp: React.FC = () => {
   useEffect(() => {
     if (error) {
       setNotification({
-        type: NotificationType.error,
+        type: NotificationType.Error,
         message: error,
       });
     }
@@ -115,11 +121,13 @@ const MyApp: React.FC = () => {
 
   function handlePlayClick() {
     if (valueGetter && selectedInputOption && selectedOutputOption) {
-      const editorValue = (valueGetter as any).current();
-      const funcKey = selectedInputOption.toLowerCase() + "To"
+      const v: any = valueGetter;
+      const editorValue = v.current();
+      const funcKey: any = selectedInputOption.toLowerCase() + "To"
         + selectedOutputOption[0].toUpperCase() + selectedOutputOption.slice(1);
       try {
-        setResults((eserialize as any)[funcKey](coerce(editorValue)));
+        const e: any = eserialize;
+        setResults(e[funcKey](coerce(editorValue)).toString());
       } catch (e) {
         console.error(e);
         setError(e.message);
@@ -159,14 +167,19 @@ const MyApp: React.FC = () => {
 
   const { t } = useTranslation();
   const theme = darkMode.value ? darkTheme : lightTheme;
+  useEffect(() => {
+    monaco.editor.setTheme(darkMode.value ? "vs-dark" : "vs");
+  }, [darkMode.value]);
+
+  const inputTitle: string = t("Input");
+  const outputTitle: string = t("Output");
+  const toggleDarkModeTitle: string = t("Toggle Dark Mode");
 
   return (
     <MuiThemeProvider theme={theme}>
       <AppBar position="sticky" color="default" elevation={0}>
         <Toolbar>
-          <Grid>
-          </Grid>
-          <Grid container alignContent="center" alignItems="center" justify="flex-start">
+          <Grid container alignContent="center" alignItems="center" justify="flex-start" xs={10}>
             <Typography variant="h6" style={{ paddingRight: "20px" }}>{t("ΞSerialize")}</Typography>
             <Typography variant="caption" style={{ paddingRight: "5px" }}>
               {t("serialize and deserialize the Ethereum Stack")}
@@ -175,7 +188,7 @@ const MyApp: React.FC = () => {
               <PlayCircle />
             </IconButton>
             {<>
-              <Tooltip title={t("Input")}>
+              <Tooltip title={inputTitle}>
                 <Button onClick={handleInputClick}>{selectedInputOption}</Button>
               </Tooltip>
               <Menu
@@ -195,7 +208,7 @@ const MyApp: React.FC = () => {
               <CompareArrows />
             </IconButton>
             {<>
-              <Tooltip title={t("Output")}>
+              <Tooltip title={outputTitle}>
                 <Button onClick={handleOutputClick}>{selectedOutputOption}</Button>
               </Tooltip>
               <Menu
@@ -212,22 +225,35 @@ const MyApp: React.FC = () => {
             </>
             }
           </Grid>
-          <Grid container alignContent="center" alignItems="center" justify="flex-end">
+          <Grid container alignContent="center" alignItems="center" justify="flex-end" xs={2}>
             <LanguageMenu />
-            <Tooltip title={t("Toggle Dark Mode")}>
-              <IconButton onClick={darkMode.toggle}>
-                {darkMode.value ? <Brightness3Icon /> : <WbSunnyIcon />}
-              </IconButton>
-            </Tooltip>
+            {hideToggleDarkMode ? null :
+              <Tooltip title={toggleDarkModeTitle}>
+                <IconButton onClick={darkMode.toggle}>
+                  {darkMode.value ? <Brightness3Icon /> : <WbSunnyIcon />}
+                </IconButton>
+              </Tooltip>
+            }
           </Grid>
         </Toolbar>
       </AppBar>
       <CssBaseline />
       <SplitPane split="vertical" minSize={100} maxSize={-100} defaultSize={"35%"} style={{ flexGrow: 1 }}>
-        <ControlledEditor
+        <MonacoEditor
           height="93vh"
+
+          editorOptions={{
+            useShadows: false,
+            minimap: {
+              enabled: false,
+            },
+            scrollBeyondLastLine: false,
+            lineNumbers: "on",
+            automaticLayout: true,
+          }}
           onChange={handleEditorChange}
-          theme={darkMode.value ? "dark" : "light"}
+          value={value || ""}
+          language="markdown"
           editorDidMount={handleEditorDidMount}
         />
         <div>
@@ -236,15 +262,15 @@ const MyApp: React.FC = () => {
             onClick={handleClearButton}>
             Clear
           </Button>
-          <Typography style={{ padding: "10px" }}>{results && results.toString()}</Typography>
+          <Typography style={{ padding: "10px" }}>{results}</Typography>
         </div>
       </SplitPane>
       <SnackBar
         close={() => {
-          setNotification({} as ISnackBarNotification);
+          setNotification(undefined);
           setError(undefined);
         }}
-        notification={notification as ISnackBarNotification} />
+        notification={notification} />
     </MuiThemeProvider>
   );
 };

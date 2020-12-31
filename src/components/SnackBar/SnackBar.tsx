@@ -74,15 +74,15 @@ const styleSnackBarContent = (theme: Theme) => ({
 });
 
 export enum NotificationType {
-  error = "error",
-  warn = "warning",
-  info = "info",
-  success = "success",
-  debug = "debug",
+  Error = "error",
+  Warn = "warning",
+  Info = "info",
+  Success = "success",
+  Debug = "debug",
 }
 
 interface IProps extends WithStyles<typeof styleSnackBar> {
-  notification: ISnackBarNotification;
+  notification?: ISnackBarNotification;
   close: any;
 }
 
@@ -98,59 +98,58 @@ export interface ISnackBarNotification {
   message: string;
 }
 
-class SnackBarCntWrapper extends React.Component<ISnackBarContentProps> {
-  public render() {
-    const { classes, className, message, onClose, variant, ...other } = this.props;
-    const Icon = variantIcon[variant];
-    return (
-      <SnackbarContent
-        className={classNames(classes[variant], className)}
-        aria-describedby="client-snackbar"
-        message={
-          <span id="client-snackbar" className={classes.message}>
-            <Icon className={classNames(classes.icon, classes.iconVariant)} />
-            {message}
-          </span>
-        }
-        action={[
-          <IconButton
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            className={classes.close}
-            onClick={onClose}
-          >
-            <CloseIcon className={classes.icon} />
-          </IconButton>,
-        ]}
-        {...other}
-      />
-    );
-  }
-}
+const SnackBarCntWrapper: React.FC<ISnackBarContentProps> = (props) => {
+  const { classes, className, message, onClose, variant, ...other } = props;
+
+  const Icon = variantIcon[variant];
+  return (
+    <SnackbarContent
+      className={classNames(classes[variant], className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
+          <Icon className={classNames(classes.icon, classes.iconVariant)} />
+          {message}
+        </span>
+      }
+      action={[
+        <IconButton
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          className={classes.close}
+          onClick={onClose}
+        >
+          <CloseIcon className={classes.icon} />
+        </IconButton>,
+      ]}
+      {...other}
+    />
+  );
+};
+
 const SnackBarContentWrapper = withStyles(styleSnackBarContent)(SnackBarCntWrapper);
 
-class SnackBarWrapper extends Component<IProps> {
+const SnackBarWrapper: React.FC<IProps> = (props) => {
+  const { classes, notification, close } = props;
+  if (isEmpty(notification)) { return null; }
+  if (!notification) { return null; }
+  return (
+    <Snackbar
+      open
+      autoHideDuration={3000}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}>
+      <SnackBarContentWrapper
+        onClose={close}
+        variant={notification.type}
+        message={<span>{notification.message}</span>}
+        className={classes.margin}
+      />
+    </Snackbar>
+  );
+};
 
-  public render() {
-    const { classes, notification, close } = this.props;
-    if (isEmpty(notification)) { return null; }
-    return (
-      <Snackbar
-        open
-        autoHideDuration={3000}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}>
-        <SnackBarContentWrapper
-          onClose={close}
-          variant={notification.type}
-          message={<span>{notification.message}</span>}
-          className={classes.margin}
-        />
-      </Snackbar>
-    );
-  }
-}
 export const SnackBar = withStyles(styleSnackBar)(SnackBarWrapper);
