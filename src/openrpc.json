@@ -1,0 +1,157 @@
+{
+  "openrpc": "1.0.0",
+  "info": {
+    "title": "Eserialize",
+    "description": "serialize and deserialize for the ethereum stack",
+    "version": "1.0.0"
+  },
+  "methods": [
+    {
+      "name": "stringToHex",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Serialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/String"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/Hex"
+      }
+    },
+    {
+      "name": "dateToHex",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Serialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/Date"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/Hex"
+      }
+    },
+    {
+      "name": "numberToHex",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Serialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/Number"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/Hex"
+      }
+    },
+    {
+      "name": "hexToString",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Deserialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/Hex"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/String"
+      }
+    },
+    {
+      "name": "hexToDate",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Deserialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/Hex"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/Date"
+      }
+    },
+    {
+      "name": "hexToNumber",
+      "tags": [
+        {
+          "$ref": "#/components/tags/Deserialize"
+        }
+      ],
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/Hex"
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/Number"
+      }
+    }
+  ],
+  "components": {
+    "tags": {
+      "Serialize": {
+        "name": "Serialize"
+      },
+      "Deserialize": {
+        "name": "Deserialize"
+      }
+    },
+    "contentDescriptors": {
+      "Number": {
+        "name": "EserializeNumber",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      "String": {
+        "name": "EserializeString",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Hex": {
+        "name": "Hex",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Hex"
+        }
+      },
+      "Date": {
+        "name": "EserializeDate",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Date"
+        }
+      }
+    },
+    "schemas": {
+      "Date": {
+        "type": "string",
+        "format": "date"
+      },
+      "Hex": {
+        "type": "string",
+        "pattern": "^0x[a-fA-F0-9]+$",
+        "description": "Hex representation of the integer"
+      }
+    }
+  }
+}

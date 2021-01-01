@@ -9,6 +9,8 @@ Features:
 - Simple Interface
 - Url Parameter Configuration
 - Dark/Light mode
+- JSON-RPC API over PostMessage
+  - See http://playground.open-rpc.org/?url=https://eserialize.com&transport=postmessageiframe for documentation
 
 ## Usage
 
