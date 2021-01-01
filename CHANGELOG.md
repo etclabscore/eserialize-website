@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/etclabscore/eserialize-website/compare/1.0.3...1.1.0) (2021-01-01)
+
+
+### Bug Fixes
+
+* update readme to link to JSON-RPC API documentation ([06d7782](https://github.com/etclabscore/eserialize-website/commit/06d7782e2d0f2c8997a05956174b3760220fffa3))
+
+
+### Features
+
+* add postmessageserver to expose eserialize via postmessage ([d50e171](https://github.com/etclabscore/eserialize-website/commit/d50e1715b161697eddbe3185b150c05e8a5eb926))
+
 ## [1.0.3](https://github.com/etclabscore/eserialize-website/compare/1.0.2...1.0.3) (2020-12-31)
 
 
